@@ -2,14 +2,9 @@ import mongoose from "mongoose";
 
 const contactSchema = new mongoose.Schema(
   {
-    firstName: {
+    fullName: {
       type: String,
-      required: [true, "First name is required"],
-      trim: true,
-    },
-    lastName: {
-      type: String,
-      required: [true, "Last name is required"],
+      required: [true, "Full name is required"],
       trim: true,
     },
     email: {
@@ -30,7 +25,7 @@ const contactSchema = new mongoose.Schema(
     message: {
       type: String,
       required: [true, "Message is required"],
-      minlength: [10, "Message must be at least 10 characters long"],
+      trim: true,
     },
     category: {
       type: String,

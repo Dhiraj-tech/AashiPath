@@ -2,6 +2,9 @@ import Contact from "../models/Contact.js";
 import { asyncHandler } from "../middleware/errorHandler.js";
 import { sendEmail } from "../utils/email.js";
 
+const getContactFullName = (contact) =>
+  contact.fullName || [contact.firstName, contact.lastName].filter(Boolean).join(" ");
+
 // @desc Get all contacts
 // @route GET /api/contacts
 // @access Private
@@ -54,11 +57,10 @@ export const getContact = asyncHandler(async (req, res) => {
 // @route POST /api/contacts
 // @access Public
 export const createContact = asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, phone, subject, message, category } = req.body;
+  const { fullName, email, phone, subject, message, category } = req.body;
 
   const contact = await Contact.create({
-    firstName,
-    lastName,
+    fullName,
     email,
     phone,
     subject,
@@ -73,7 +75,7 @@ export const createContact = asyncHandler(async (req, res) => {
       subject: "We received your message - AashiPath Scientific Solutions",
       template: "contactConfirmation",
       data: {
-        firstName,
+        fullName,
         subject,
       },
     });
@@ -88,8 +90,7 @@ export const createContact = asyncHandler(async (req, res) => {
       subject: `New Contact Form: ${subject}`,
       template: "contactNotification",
       data: {
-        firstName,
-        lastName,
+        fullName,
         email,
         subject,
         category,
@@ -218,7 +219,7 @@ export const sendAdminReply = asyncHandler(async (req, res) => {
       subject: `Re: ${contact.subject} - AashiPath Scientific Solutions`,
       template: "adminReply",
       data: {
-        firstName: contact.firstName,
+        fullName: getContactFullName(contact),
         subject: contact.subject,
         message: response,
       },

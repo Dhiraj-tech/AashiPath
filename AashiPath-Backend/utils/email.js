@@ -42,7 +42,7 @@ const getEmailTemplate = (template, data) => {
     contactConfirmation: {
       subject: "We received your message",
       html: `
-        <h2>Thank you for contacting us, ${data.firstName}!</h2>
+        <h2>Thank you for contacting us, ${data.fullName}!</h2>
         <p>We have received your message regarding: <strong>${data.subject}</strong></p>
         <p>Our team will get back to you as soon as possible.</p>
         <p>Best regards,<br>AashiPath Scientific Solutions Team</p>
@@ -52,7 +52,7 @@ const getEmailTemplate = (template, data) => {
       subject: `New Contact Form: ${data.subject}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${data.firstName} ${data.lastName}</p>
+        <p><strong>Full Name:</strong> ${data.fullName}</p>
         <p><strong>Email:</strong> ${data.email}</p>
         <p><strong>Subject:</strong> ${data.subject}</p>
         <p><strong>Category:</strong> ${data.category}</p>
@@ -63,7 +63,7 @@ const getEmailTemplate = (template, data) => {
       subject: `Re: ${data.subject}`,
       html: `
         <h2>Response to your inquiry</h2>
-        <p>Dear ${data.firstName},</p>
+        <p>Dear ${data.fullName},</p>
         <p>Thank you for reaching out to us regarding: <strong>${data.subject}</strong></p>
         <p>${data.message}</p>
         <p>If you have any further questions, please don't hesitate to contact us.</p>

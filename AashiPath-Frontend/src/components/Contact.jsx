@@ -1,5 +1,4 @@
 import { useRef, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { postContact } from "../api/client";
 import {
   FaWhatsapp,
@@ -20,13 +19,9 @@ const Contact = ({ hideHeading = false }) => {
     // Prepare payload for backend contact API
     const formData = new FormData(form.current);
     const fullName = formData.get("full_name") || "";
-    const nameParts = fullName.trim().split(" ");
-    const firstName = nameParts[0] || "";
-    const lastName = nameParts.slice(1).join(" ") || nameParts[0] || "";
 
     const payload = {
-      firstName: firstName,
-      lastName: lastName,
+      fullName: fullName.trim(),
       email: formData.get("email") || "",
       phone: formData.get("phone") || "",
       subject: formData.get("service_type") || "Service Inquiry",
@@ -35,7 +30,7 @@ const Contact = ({ hideHeading = false }) => {
     };
 
     postContact(payload)
-      .then((res) => {
+      .then(() => {
         setStatus("success");
         form.current.reset();
         setTimeout(() => setStatus(null), 5000);
@@ -238,7 +233,6 @@ const Contact = ({ hideHeading = false }) => {
                 placeholder="Tell us about your requirement... *"
                 className="input-field resize-none"
                 required
-                minLength="5"
               />
 
               <button

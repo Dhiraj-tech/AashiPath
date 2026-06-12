@@ -11,6 +11,9 @@ import {
 
 const API_BASE = import.meta.env.VITE_API_BASE || "";
 
+const getContactName = (contact) =>
+  contact.fullName || [contact.firstName, contact.lastName].filter(Boolean).join(" ");
+
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
@@ -68,8 +71,7 @@ const AdminDashboard = () => {
     if (normalizedQuery) {
       filtered = filtered.filter(
         (contact) =>
-          contact.firstName.toLowerCase().includes(normalizedQuery) ||
-          contact.lastName.toLowerCase().includes(normalizedQuery) ||
+          getContactName(contact).toLowerCase().includes(normalizedQuery) ||
           contact.email.toLowerCase().includes(normalizedQuery)
       );
     }
@@ -339,7 +341,7 @@ const AdminDashboard = () => {
                       className="hover:bg-gray-50 transition"
                     >
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        {contact.firstName} {contact.lastName}
+                        {getContactName(contact)}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600">
                         <div className="flex items-center gap-2">
@@ -407,7 +409,7 @@ const AdminDashboard = () => {
             className="bg-white rounded-lg shadow-xl max-w-2xl w-full p-6"
           >
             <h3 className="text-lg font-bold mb-4 text-gray-900">
-              Reply to {selectedContact.firstName}
+              Reply to {getContactName(selectedContact)}
             </h3>
 
             <div className="bg-gray-50 rounded-lg p-4 mb-4">

@@ -20,15 +20,11 @@ export const validateBooking = [
 ];
 
 export const validateContact = [
-  body("firstName").trim().notEmpty().withMessage("First name is required"),
-  body("lastName").trim().notEmpty().withMessage("Last name is required"),
+  body("fullName").trim().notEmpty().withMessage("Full name is required"),
   body("email").isEmail().normalizeEmail().withMessage("Valid email is required"),
   body("phone").trim().notEmpty().withMessage("Phone number is required"),
   body("subject").trim().notEmpty().withMessage("Subject is required"),
-  body("message")
-    .trim()
-    .isLength({ min: 5 })
-    .withMessage("Message must be at least 5 characters"),
+  body("message").trim().notEmpty().withMessage("Message is required"),
 ];
 
 export const validateService = [
