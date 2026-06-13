@@ -1,6 +1,8 @@
 import Founder from "../assets/Home/founder.jpg";
 import Engineer1 from "../assets/Home/Engineer1.jpeg";
 import Engineer2 from "../assets/Home/Engineer2.jpg";
+import Engineer4 from "../assets/Home/Engineer4.jpg";
+import Engineer5 from "../assets/Home/Engineer5.jpg";
 
 const teamMembers = [
   {
@@ -20,6 +22,18 @@ const teamMembers = [
     name: "Mr. Sagar Kumar Mishra",
     designation: "Field Service Engineer | 2+ Years Experience",
     image: Engineer2,
+  },
+  {
+    id: 4,
+    name: "Mr. Gobind Sah",
+    designation: "Website Administrator | 1+ Years Experience",
+    image: Engineer4,
+  },
+  {
+    id: 5,
+    name: "Mr. Dhiraj Kumar Ray",
+    designation: "Site Reliability Engineer | 2+ Years Experience",
+    image: Engineer5,
   },
 ];
 
